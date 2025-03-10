@@ -127,7 +127,12 @@ let
       );
 
   # Return a Go attribute and error out if the Go version is older than was specified in go.mod.
-  selectGo = attrs: goMod: attrs.go or (if goMod == null then buildPackages.go else
+  selectGo =
+    attrs: goMod:
+    attrs.go or (
+      if goMod == null then
+        buildPackages.go_1_24
+      else
   (
     let
       goVersion = goMod.go;
